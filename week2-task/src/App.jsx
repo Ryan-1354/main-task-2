@@ -13,8 +13,8 @@ import "./assets/style.css";
 function App() {
   //管理登入資訊
   const [formData, setFormData]=useState({
-    username:'1354ark@gmail.com',
-    password:'hexschool666',
+    username:'example@gmail.com',
+    password:'******',
   })
   //管理登入狀態
   const [isAuth, setIsAuth]= useState(false)
