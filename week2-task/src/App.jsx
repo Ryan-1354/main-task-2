@@ -13,15 +13,14 @@ import "./assets/style.css";
 function App() {
   //管理登入資訊
   const [formData, setFormData]=useState({
-    username:'example@gmail.com',
-    password:'******',
+    username:'請輸入帳號',
+    password:'請輸入密碼',
   })
   //管理登入狀態
   const [isAuth, setIsAuth]= useState(false)
   // 表單輸入處理
   const handleInputChange=e=>{
     const {name, value}=e.target;
-    console.log(name, value);
     setFormData(preData=>({
       ...preData,
       [name]:value,
@@ -48,7 +47,6 @@ const onSubmit= async (e)=>{
   try{
     e.preventDefault();
     const response=await axios.post(`${API_BASE}/v2/admin/signin`, formData);
-    console.log(response.data);
     const {token, expired}=response.data;
     document.cookie = `hexToken=${token};expires=${new Date(expired)};`;
     // 之後用 axios 發出的所有請求，都會自動帶上 Authorization header
@@ -70,7 +68,6 @@ try{
   ?.split("=")[1];
   alert(`登入狀態${res.data.success}`);
 }catch(err){
-  console.log(err.response);
 }
 }
 
@@ -122,8 +119,8 @@ try{
                         <p className="d-flex align-items-end">價格：<del className='fs-6 text-secondary'>{tempProduct.origin_price}</del>元 / {tempProduct.price}元</p>
                         <h5 className="card-text d-flex flex-wrap">更多圖片：</h5>
                         <div className="d-flex flex-wrap">
-                            {tempProduct.imagesUrl.map((item, index)=>(
-                            <img key={item.index} src={item} alt={item.title}/>
+                            {tempProduct.imagesUrl.map((item)=>(
+                            <img key={item.id} src={item} alt={item.title}/>
                             ))}
                         </div>
                     </div>
